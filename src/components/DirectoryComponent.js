@@ -15,7 +15,7 @@ function RenderDirectoryItem({campsite4, onClicka}) {
 
 function Directory(props) {
     
-// console.log(props)
+console.log(props)
     const directory = props.campsitez.map(campsiter => {
         return (
             <div key={campsiter.id} className="col-md-5 m-1">
