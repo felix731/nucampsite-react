@@ -5,7 +5,7 @@ import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
 class Directory extends Component {
 
     render() {
-        console.log(this.props.campsites)
+
         const directory = this.props.campsites.map(campsite => {
             return (
                 <div key={campsite.id} className="col-md-5 m-1">
