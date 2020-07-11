@@ -9,6 +9,8 @@ import { CAMPSITES } from '../shared/campsites';
 import { COMMENTS } from '../shared/comments';
 import { PARTNERS } from '../shared/partners';
 import { PROMOTIONS } from '../shared/promotions';
+import About from './AboutComponent';
+
 
 class Main extends Component {
     constructor(props) {
@@ -41,6 +43,7 @@ class Main extends Component {
                         <Route path='/home' component={HomePage} />
                         <Route exact path='/directory' render={() => <Directory campsitez={this.state.campsites} />} />
                         <Route path='/contactus' component={Contact}/>
+                        <Route exact path='/about' render={() => <About partnerz={this.state.partners} />} />
                         <Redirect to='/home' />
                     </Switch>
                     <Footer />
