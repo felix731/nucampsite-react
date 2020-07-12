@@ -10,6 +10,7 @@ import { COMMENTS } from '../shared/comments';
 import { PARTNERS } from '../shared/partners';
 import { PROMOTIONS } from '../shared/promotions';
 import About from './AboutComponent';
+import CampsiteInfo from './CampsiteInfoComponent';
 
 
 class Main extends Component {
@@ -29,13 +30,22 @@ class Main extends Component {
         const HomePage = () => {
             return (
             <Home 
-                campsite={this.state.campsites.filter(campsite => campsite.featured)[0]}
-                promotion={this.state.promotions.filter(promotion => promotion.featured)[0]}
-                partner={this.state.partners.filter(partner => partner.featured)[0]}
+                campsitee={this.state.campsites.filter(campsite => campsite.featured)[0]}
+                promotione={this.state.promotions.filter(promotion => promotion.featured)[0]}
+                partnere={this.state.partners.filter(partner => partner.featured)[0]}
             />
             );
         }
-        
+
+        const CampsiteWithId = ({match}) => {
+            return (
+                <CampsiteInfo 
+                    campsiteo={this.state.campsites.filter(campsitew => campsitew.id === +match.params.campsiteId)[0]}
+                    commentso={this.state.comments.filter(commentw => commentw.campsiteId === +match.params.campsiteId)}
+                />
+            );
+    };    
+
         return (
                 <div>
                     <Header />
@@ -44,6 +54,7 @@ class Main extends Component {
                         <Route exact path='/directory' render={() => <Directory campsitez={this.state.campsites} />} />
                         <Route path='/contactus' component={Contact}/>
                         <Route exact path='/about' render={() => <About partnerz={this.state.partners} />} />
+                        <Route path='/directory/:campsiteId' component={CampsiteWithId} />
                         <Redirect to='/home' />
                     </Switch>
                     <Footer />

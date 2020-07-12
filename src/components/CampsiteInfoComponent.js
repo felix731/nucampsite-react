@@ -1,27 +1,27 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
-function RenderCampsite({campsite}) {
+function RenderCampsite({campsitec}) {
         return (
             <div className="col-md-5 m-1">
                 <Card>
-                    <CardImg top src={campsite.image} alt={campsite.name} />
+                    <CardImg top src={campsitec.image} alt={campsitec.name} />
                     <CardBody>
-                        <CardTitle>{campsite.name}</CardTitle>
-                        <CardText>{campsite.description}</CardText>
+                        <CardText>{campsitec.description}</CardText>
                     </CardBody>
                 </Card>
             </div>
         );
     }
     
-function RenderComments({comments}) {
-        if (comments) {
+function RenderComments({commentsc}) {
+        if (commentsc) {
             return (
                 <div className="col-md-5 m-1">
                     <h4>Comments</h4>
-                    {comments.map(comment => {
+                    {commentsc.map(comment => {
                         return (
                             <div key={comment.id}>
                                 <p>"{comment.text}"<br></br>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
@@ -35,12 +35,22 @@ function RenderComments({comments}) {
     }
 
 function CampsiteInfo(props) {
-        if (props.campsite) {
+        if (props.campsiteo) {
             return (
                 <div className="container">
                     <div className="row">
-                        <RenderCampsite campsite={props.campsite} />
-                        <RenderComments comments={props.campsite.comments} />
+                        <div className="col">
+                            <Breadcrumb>
+                                <BreadcrumbItem><Link to="/directory">Directory</Link></BreadcrumbItem>
+                                <BreadcrumbItem active>{props.campsiteo.name}</BreadcrumbItem>
+                            </Breadcrumb>
+                            <h2>{props.campsiteo.name}</h2>
+                            <hr />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <RenderCampsite campsitec={props.campsiteo} />
+                        <RenderComments commentsc={props.commentso} />
                     </div>
                 </div>
             )
