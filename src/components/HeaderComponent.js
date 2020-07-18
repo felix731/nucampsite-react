@@ -109,6 +109,7 @@ class Header extends Component {
                 </Modal>
             </React.Fragment>
         );
+
     }
 }
 

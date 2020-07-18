@@ -3,36 +3,30 @@ import Directory from './DirectoryComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Contact from './ContactComponent';
-import { CAMPSITES } from '../shared/campsites';
-import { COMMENTS } from '../shared/comments';
-import { PARTNERS } from '../shared/partners';
-import { PROMOTIONS } from '../shared/promotions';
 import About from './AboutComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
 
+const mapStateToProps = state => {
+    return {
+        campsites: state.campsites,
+        comments: state.comments,
+        partners: state.partners,
+        promotions: state.promotions
+    };
+};
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            campsites: CAMPSITES,
-            comments: COMMENTS,
-            partners: PARTNERS,
-            promotions: PROMOTIONS
-        };
-    }
-
-
     render() {
 
         const HomePage = () => {
             return (
             <Home 
-                campsitee={this.state.campsites.filter(campsite => campsite.featured)[0]}
-                promotione={this.state.promotions.filter(promotion => promotion.featured)[0]}
-                partnere={this.state.partners.filter(partner => partner.featured)[0]}
+                campsitee={this.props.campsites.filter(campsite => campsite.featured)[0]}
+                promotione={this.props.promotions.filter(promotion => promotion.featured)[0]}
+                partnere={this.props.partners.filter(partner => partner.featured)[0]}
             />
             );
         }
@@ -40,8 +34,8 @@ class Main extends Component {
         const CampsiteWithId = ({match}) => {
             return (
                 <CampsiteInfo 
-                    campsiteo={this.state.campsites.filter(campsitew => campsitew.id === +match.params.campsiteId)[0]}
-                    commentso={this.state.comments.filter(commentw => commentw.campsiteId === +match.params.campsiteId)}
+                    campsiteo={this.props.campsites.filter(campsitew => campsitew.id === +match.params.campsiteId)[0]}
+                    commentso={this.props.comments.filter(commentw => commentw.campsiteId === +match.params.campsiteId)}
                 />
             );
     };    
@@ -51,9 +45,9 @@ class Main extends Component {
                     <Header />
                     <Switch>
                         <Route path='/home' component={HomePage} />
-                        <Route exact path='/directory' render={() => <Directory campsitez={this.state.campsites} />} />
+                        <Route exact path='/directory' render={() => <Directory campsitez={this.props.campsites} />} />
                         <Route path='/contactus' component={Contact}/>
-                        <Route exact path='/about' render={() => <About partnerz={this.state.partners} />} />
+                        <Route exact path='/about' render={() => <About partnerz={this.props.partners} />} />
                         <Route path='/directory/:campsiteId' component={CampsiteWithId} />
                         <Redirect to='/home' />
                     </Switch>
@@ -65,4 +59,4 @@ class Main extends Component {
 
 
 
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));
