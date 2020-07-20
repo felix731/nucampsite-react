@@ -39,17 +39,17 @@ class CommentForm extends Component {
                                 <Label>Rating</Label>
                                 <Control.select model=".rating" name="rating"
                                         className="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
                                         <option>5</option>
+                                        <option>4</option>
+                                        <option>3</option>
+                                        <option>2</option>
+                                        <option>1</option>
                                 </Control.select>
                                 </Col>
                             </Row>
                             <Row className="form-group">
                                 <Col md={10}>
-                                <Label>Your Name</Label>
+                                <Label>Your Name?</Label>
                                 <Control.text model=".author" name="author"
                                         placeholder="First Name"
                                         className="form-control"
@@ -74,7 +74,7 @@ class CommentForm extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={10}>
-                                <Label>Comment</Label>
+                                <Label>Comment?</Label>
                                 <Control.textarea row="6" model=".text" name="text"
                                         className="form-control">
                                 </Control.textarea>
