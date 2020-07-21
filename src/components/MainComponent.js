@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
+import { addComment } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -15,12 +16,17 @@ const mapStateToProps = state => {
         comments: state.comments,
         partners: state.partners,
         promotions: state.promotions
+
     };
+};
+
+const mapDispatchToProps = {
+    addCommentr: (campsiteId, rating, author, text) => (addComment(campsiteId, rating, author, text)) 
 };
 
 class Main extends Component {
     render() {
-
+        console.log(this.props);
         const HomePage = () => {
             return (
             <Home 
@@ -36,6 +42,7 @@ class Main extends Component {
                 <CampsiteInfo 
                     campsiteo={this.props.campsites.filter(campsitew => campsitew.id === +match.params.campsiteId)[0]}
                     commentso={this.props.comments.filter(commentw => commentw.campsiteId === +match.params.campsiteId)}
+                    addCommentThatWasPropped={this.props.addCommentr}
                 />
             );
     };    
@@ -59,4 +66,4 @@ class Main extends Component {
 
 
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
