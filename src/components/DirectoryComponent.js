@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {Loading} from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 
@@ -10,7 +11,7 @@ function RenderDirectoryItem({campsite4}) {
     return (
         <Card>
             <Link to={`/directory/${campsite4.id}`}>
-                <CardImg width="100%" src={campsite4.image} alt={campsite4.name} />
+                <CardImg width="100%" src={baseUrl + campsite4.image} alt={campsite4.name} />
                 <CardImgOverlay>
                     <CardTitle>{campsite4.name}</CardTitle>
                 </CardImgOverlay>
