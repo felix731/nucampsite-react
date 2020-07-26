@@ -1,4 +1,5 @@
 import * as ActionTypes from './ActionTypes';
+
 export const PromotionsReducer = (state = { isLoading: true,
                                         errMess: null,
                                         promotions: [] }, action) => {
